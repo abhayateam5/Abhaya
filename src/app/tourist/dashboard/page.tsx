@@ -182,30 +182,68 @@ export default function TouristDashboard() {
                 <div className="px-4 mb-4">
                     <div className="glass-card h-48 flex items-center justify-center relative overflow-hidden">
                         {activeTab === 'map' && (
-                            <div className="text-center">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10" />
-                                <Map className="w-12 h-12 mx-auto text-muted-foreground mb-2 relative z-10" />
-                                <p className="text-muted-foreground relative z-10">Interactive Map</p>
-                                <p className="text-xs text-muted-foreground mt-1 relative z-10">
-                                    {position ? `${position.latitude.toFixed(4)}, ${position.longitude.toFixed(4)}` : 'Getting location...'}
-                                </p>
+                            <div className="w-full h-full relative">
+                                {/* Mock Map Placeholder - In production use Google Maps Embed API */}
+                                <div className="absolute inset-0 bg-[#e5e7eb] flex items-center justify-center">
+                                    <div className="text-center opacity-50">
+                                        <Map className="w-12 h-12 mx-auto mb-2 text-gray-500" />
+                                        <p className="text-sm font-medium text-gray-600">Map View</p>
+                                    </div>
+                                    {/* Grid lines for map effect */}
+                                    <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(#d1d5db 1px, transparent 1px), linear-gradient(90deg, #d1d5db 1px, transparent 1px)', backgroundSize: '40px 40px', opacity: 0.5 }}></div>
+                                </div>
+                                {position && (
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                        <div className="w-4 h-4 bg-primary rounded-full animate-ping absolute"></div>
+                                        <div className="w-4 h-4 bg-primary rounded-full relative border-2 border-white shadow-lg"></div>
+                                    </div>
+                                )}
+                                <div className="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg text-xs shadow-sm">
+                                    <p className="font-medium truncate">
+                                        {position ? `${position.latitude.toFixed(4)}, ${position.longitude.toFixed(4)}` : 'Locating...'}
+                                    </p>
+                                </div>
                             </div>
                         )}
                         {activeTab === 'weather' && (
-                            <div className="text-center">
-                                <Cloud className="w-12 h-12 mx-auto text-primary mb-2" />
-                                <p className="text-2xl font-bold">28°C</p>
-                                <p className="text-muted-foreground">Partly Cloudy</p>
-                                <p className="text-xs text-muted-foreground mt-1">New Delhi, India</p>
+                            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 relative overflow-hidden flex flex-col justify-between">
+                                <div className="relative z-10 flex justify-between items-start">
+                                    <div>
+                                        <p className="font-medium opacity-90">New Delhi</p>
+                                        <p className="text-sm opacity-75">Today, {new Date().toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                                    </div>
+                                    <Cloud className="w-10 h-10" />
+                                </div>
+                                <div className="relative z-10">
+                                    <p className="text-5xl font-bold">28°</p>
+                                    <p className="font-medium mt-1">Partly Cloudy</p>
+                                    <div className="flex gap-4 mt-4 text-xs opacity-75">
+                                        <span>H: 31°</span>
+                                        <span>L: 24°</span>
+                                        <span>Humidity: 65%</span>
+                                    </div>
+                                </div>
+                                <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
                             </div>
                         )}
                         {activeTab === 'guides' && (
-                            <div className="text-center">
-                                <BookOpen className="w-12 h-12 mx-auto text-muted-foreground mb-2" />
-                                <p className="text-muted-foreground">Local Guides & Tips</p>
-                                <Button size="sm" variant="secondary" className="mt-2">
-                                    Explore Guides
-                                </Button>
+                            <div className="w-full h-full bg-black relative">
+                                <iframe
+                                    className="w-full h-full object-cover opacity-80"
+                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=0&mute=1&loop=1&playlist=dQw4w9WgXcQ"
+                                    title="Safety Guide"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                                    <div>
+                                        <p className="font-bold text-white">Tourist Safety Guide</p>
+                                        <p className="text-xs text-gray-300">Essential tips for safe travel in India</p>
+                                        <Button size="sm" variant="secondary" className="mt-2 h-7 text-xs bg-white/20 hover:bg-white/30 border-none text-white backdrop-blur-md">
+                                            Watch Full Video
+                                        </Button>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>

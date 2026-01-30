@@ -90,7 +90,7 @@ export function EFIRGenerator({ isOpen, onClose, userLocation, userName, userPho
 
     return (
         <Modal open={isOpen} onOpenChange={onClose}>
-            <div className="p-6 max-h-[85vh] overflow-y-auto">
+            <div className="max-h-[75vh] overflow-y-auto -m-6 p-6">
                 {/* Header */}
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 rounded-xl bg-danger/20">
