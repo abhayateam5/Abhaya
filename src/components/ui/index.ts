@@ -12,6 +12,7 @@ export {
     DialogFooter,
     DialogTitle,
     DialogDescription,
+    Modal,
 } from './Modal';
 export { Input, Textarea, Select, type InputProps, type TextareaProps, type SelectProps } from './Input';
 export { Badge, badgeVariants, type BadgeProps } from './Badge';
