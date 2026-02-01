@@ -1,7 +1,10 @@
+'use client';
+
 export const dynamic = 'force-dynamic';
 
 import Link from 'next/link';
 import { Shield, ArrowRight, MapPin, Bell, Users, Lock } from 'lucide-react';
+import LogoutButton from '@/components/LogoutButton';
 
 export default function HomePage() {
   return (
@@ -55,6 +58,7 @@ export default function HomePage() {
             >
               Create Account
             </Link>
+            <LogoutButton />
           </div>
 
           {/* Feature Icons */}
