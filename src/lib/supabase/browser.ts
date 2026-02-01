@@ -25,5 +25,15 @@ export function createBrowserClient() {
     return client;
 }
 
-// Export a singleton instance for convenience
-export const supabase = createBrowserClient();
+// Lazy-loaded singleton - only initializes when accessed
+let _supabase: ReturnType<typeof createClient> | null = null;
+
+export const supabase = new Proxy({} as ReturnType<typeof createClient>, {
+    get(target, prop) {
+        if (!_supabase) {
+            _supabase = createBrowserClient();
+        }
+        return (_supabase as any)[prop];
+    }
+});
+
