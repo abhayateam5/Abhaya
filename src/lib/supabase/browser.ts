@@ -1,8 +1,9 @@
 import { createBrowserClient as createClient } from '@supabase/ssr';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
-let client: ReturnType<typeof createClient> | null = null;
+let client: SupabaseClient | null = null;
 
-export function createBrowserClient() {
+export function createBrowserClient(): SupabaseClient {
     if (client) return client;
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -25,15 +26,10 @@ export function createBrowserClient() {
     return client;
 }
 
-// Lazy-loaded singleton - only initializes when accessed
-let _supabase: ReturnType<typeof createClient> | null = null;
+// Simple getter function - no Proxy, no module-level initialization
+export function getSupabase(): SupabaseClient {
+    return createBrowserClient();
+}
 
-export const supabase = new Proxy({} as ReturnType<typeof createClient>, {
-    get(target, prop) {
-        if (!_supabase) {
-            _supabase = createBrowserClient();
-        }
-        return (_supabase as any)[prop];
-    }
-});
-
+// For backward compatibility
+export const supabase = createBrowserClient();
