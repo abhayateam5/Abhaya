@@ -1,0 +1,27 @@
+# Exclude legacy MongoDB API routes (not yet migrated to Supabase)
+src/app/api/auth/login
+src/app/api/auth/register
+src/app/api/auth/logout
+src/app/api/auth/session
+src/app/api/family
+src/app/api/itinerary
+src/app/api/location
+src/app/api/police
+src/app/api/safety-score
+src/app/api/sos
+src/app/api/user/profile
+
+# Exclude legacy MongoDB models
+src/models
+
+# Exclude legacy MongoDB connection
+src/lib/mongodb.ts
+src/lib/auth.ts
+
+# Keep test files local only
+test-connection.js
+test-supabase.js
+
+# Keep documentation local
+*.md
+!README.md
