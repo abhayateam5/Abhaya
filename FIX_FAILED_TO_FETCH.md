@@ -106,7 +106,7 @@ If you can't find your ABHAYA project in the dashboard:
 1. Go to https://supabase.com/dashboard
 2. Click "New Project"
 3. Name it "ABHAYA"
-4. Choose region: Mumbai
+4. Choose region: Mumbai 
 5. Set a database password
 6. Wait 2 minutes for setup
 7. Get the URL and anon key from Settings → API
