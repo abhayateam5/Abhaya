@@ -337,7 +337,139 @@
 ## Success Criteria
 
 ✅ All 15 tables created  
-✅ RLS policies enforced  
+---
+
+## Phase 15: Rule Engine 🆕 (3-4 hrs)
+
+**Config-Based Escalation Logic:**
+- City-specific rules
+- Jurisdiction-based routing
+- Time-based escalation
+- Custom SOS workflows
+- No hard-coded emergency logic
+
+**Rule Types:**
+- Location-based (city, zone)
+- Time-based (day/night)
+- User-based (role, trust score)
+- Event-based (SOS type, severity)
+
+**Features:**
+- Visual rule builder
+- Rule testing/simulation
+- Version control for rules
+- Audit trail for rule changes
+- Emergency override capability
+
+**Output:** Flexible, no-code customizable safety system
+
+---
+
+## Phase 16: Trust Score System 🆕 (3-4 hrs)
+
+**Anti-Abuse Layer:**
+- User trust score (0-100)
+- SOS confidence scoring
+- False alarm detection
+- Behavioral pattern analysis
+- Abuse prevention
+
+**Trust Factors:**
+- Account age
+- Verification level
+- SOS history (false alarms)
+- Location consistency
+- Family vouching
+
+**Actions Based on Trust:**
+- Low trust → Manual review
+- Medium trust → Standard flow
+- High trust → Priority response
+- Declining trust → Warnings
+
+**Output:** Police-trustworthy alert system
+
+---
+
+## Phase 17: Data Retention Automation 🆕 (2-3 hrs)
+
+**Retention Rules:**
+- Location history → 90 days
+- SOS events → 7 years (legal compliance)
+- Audit logs → Permanent
+- Evidence files → Case closed + 1 year
+- User data → Account deletion + 30 days
+
+**Implementation:**
+- Scheduled cleanup jobs (daily)
+- Immutable flags for legal tables
+- Soft delete with recovery window
+- Compliance reporting
+- Data export for users
+
+**Legal Compliance:**
+- GDPR right to deletion
+- Indian IT Act compliance
+- Court-defensible retention
+- Audit trail for all deletions
+
+**Output:** Court-defensible data lifecycle
+
+---
+
+## Phase 18: Advanced Load & Chaos Testing 🆕 (4-5 hrs)
+
+**Load Testing Scenarios:**
+- 1,000 concurrent SOS events
+- 10,000 location updates/second
+- 100 police officers online
+- 50,000 active users
+- Database failover simulation
+
+**Chaos Testing:**
+- No internet connection
+- GPS failure/spoofing
+- All police offline
+- Database high latency
+- Realtime channel disconnect
+- Server crash during SOS
+
+**Fallback Verification:**
+- Offline queues working
+- SMS-based SOS functional
+- Cached last location used
+- Graceful degradation
+- Auto-recovery after reconnect
+
+**Performance Targets:**
+- SOS trigger < 2 seconds
+- Location update < 500ms
+- Dashboard load < 1 second
+- 99.9% uptime
+- Zero data loss
+
+**Output:** Stress-verified, failure-tolerant system
+
+---
+
+## 📊 Updated Timeline
+
+**Total:** 60-75 hours (18 phases)
+
+**Week 1 (25-30 hrs):**
+- Phases 1-6: Foundation & Core Safety
+
+**Week 2 (25-30 hrs):**
+- Phases 7-12: Intelligence & Dashboards
+
+**Week 3 (10-15 hrs):**
+- Phases 13-18: Advanced Features & Testing
+
+---
+
+## ✅ Final Production Checklist
+
+✅ 15 database tables with RLS  
 ✅ Real-time channels working  
 ✅ SOS triggers in <2 seconds  
 ✅ Location updates every 5s (SOS mode)  
@@ -345,10 +477,15 @@
 ✅ Auto-escalation tested  
 ✅ Police dashboard live  
 ✅ Mobile responsive  
+✅ Rule engine configured  
+✅ Trust scoring active  
+✅ Data retention automated  
+✅ Load tested (1000 concurrent SOS)  
+✅ Chaos tested (all failure modes)  
 ✅ Production deployed  
 
 ---
 
-**This plan is production-ready for police deployment.**
+**This plan is production-ready for police deployment with advanced features.**
 
 🆕 = Enhanced feature for safety-critical use

@@ -20,27 +20,36 @@ export default function LoginPage() {
         setIsLoading(true);
 
         try {
-            const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-            });
+            // Use Supabase Auth
+            const { signIn } = await import('@/lib/auth');
+            const { user, error: authError } = await signIn({ email, password });
 
-            const data = await res.json();
-
-            if (!data.success) {
-                setError(data.error || 'Login failed');
+            if (authError) {
+                setError(authError.message || 'Invalid email or password');
                 return;
             }
 
-            // Redirect based on role
-            if (data.data.role === 'police') {
-                router.push('/police/dashboard');
-            } else {
-                router.push('/tourist/dashboard');
+            if (user) {
+                // Check if profile is complete
+                const profileResponse = await fetch('/api/profile/complete');
+                const profileData = await profileResponse.json();
+
+                if (!profileData.complete) {
+                    router.push('/onboarding');
+                } else {
+                    // Redirect based on role
+                    const res = await fetch('/api/profile');
+                    const data = await res.json();
+
+                    if (data.data?.role === 'police') {
+                        router.push('/police/dashboard');
+                    } else {
+                        router.push('/tourist/dashboard');
+                    }
+                }
             }
-        } catch (err) {
-            setError('Network error. Please try again.');
+        } catch (err: any) {
+            setError(err.message || 'Network error. Please try again.');
         } finally {
             setIsLoading(false);
         }
