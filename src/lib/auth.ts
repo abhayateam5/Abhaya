@@ -125,6 +125,91 @@ export async function getCurrentUser(): Promise<User | null> {
 }
 
 /**
+ * Get current authenticated user (SERVER-SIDE for API routes)
+ * This function uses request headers to get the session from cookies
+ * @returns Current user or null
+ */
+export async function getCurrentUserServer(request?: Request): Promise<User | null> {
+    try {
+        // Use server-side supabase instance
+        const { createServerClient } = await import('@supabase/ssr');
+        const { cookies } = await import('next/headers');
+
+        const cookieStore = cookies();
+
+        const supabaseServer = createServerClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+            {
+                cookies: {
+                    get(name: string) {
+                        return cookieStore.get(name)?.value;
+                    },
+                },
+            }
+        );
+
+        const { data: { user } } = await supabaseServer.auth.getUser();
+        console.log('Server auth check - User:', user?.id || 'not found');
+        return user;
+    } catch (error) {
+        console.error('Error getting current user (server):', error);
+        return null;
+    }
+}
+
+/**
+ * Get authenticated Supabase client for API routes
+ * This client has the user's session and will work with RLS policies
+ * @returns Authenticated Supabase client and user
+ */
+export async function getAuthenticatedServerClient() {
+    const { createServerClient } = await import('@supabase/ssr');
+    const { cookies } = await import('next/headers');
+
+    const cookieStore = cookies();
+
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+            cookies: {
+                get(name: string) {
+                    return cookieStore.get(name)?.value;
+                },
+                set(name: string, value: string, options: any) {
+                    try {
+                        cookieStore.set({ name, value, ...options });
+                    } catch (error) {
+                        // Handle cookie setting errors
+                    }
+                },
+                remove(name: string, options: any) {
+                    try {
+                        cookieStore.set({ name, value: '', ...options });
+                    } catch (error) {
+                        // Handle cookie removal errors
+                    }
+                },
+            },
+        }
+    );
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+    console.log('=== AUTH DEBUG ===');
+    console.log('User ID:', user?.id);
+    console.log('Session exists:', !!session);
+    console.log('Session access_token exists:', !!session?.access_token);
+    console.log('User error:', userError?.message);
+    console.log('Session error:', sessionError?.message);
+    console.log('==================');
+
+    return { supabase, user };
+}
+
+/**
  * Get current session
  * @returns Current session or null
  */
