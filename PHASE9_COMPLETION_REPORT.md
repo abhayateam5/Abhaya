@@ -71,16 +71,23 @@
 
 ## 🚀 Next Steps
 
-### Phase 10: e-FIR & Legal Evidence
-- Auto-filled FIR from profile
-- Evidence upload (audio, GPS, photos)
-- FIR number generation
-- Tamper-proof hash
-- PDF export
+### ✅ Phase 10: e-FIR & Legal Evidence (COMPLETED)
+- ✅ Auto-filled FIR from profile
+- ✅ Evidence upload support
+- ✅ FIR number generation (FIR/YYYY/MM/XXXXX)
+- ✅ Tamper-proof hash
+- ✅ Test user support with RLS policies
+
+### Phase 11: Safety Score v2
+- Location safety scoring (40%)
+- Time of day factor (15%)
+- Recent incidents (20%)
+- User behavior (15%)
+- Battery level (10%)
 
 ---
 
 ## 📊 Overall Progress
 
-**Phases Completed:** 9/18 (50%)  
-**Estimated Remaining:** ~30 hours
+**Phases Completed:** 10/18 (56%)  
+**Estimated Remaining:** ~25 hours
