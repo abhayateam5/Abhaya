@@ -33,6 +33,10 @@ export async function POST(request: NextRequest) {
                 p_radius_meters: 1000
             });
 
+        if (locationError) {
+            console.error('Location score error:', locationError);
+        }
+
         // Get recent incidents score from database
         const { data: incidentScoreData, error: incidentError } = await supabase
             .rpc('get_recent_incidents_score', {
@@ -42,27 +46,50 @@ export async function POST(request: NextRequest) {
                 p_days: 7
             });
 
+        if (incidentError) {
+            console.error('Incident score error:', incidentError);
+        }
+
         // Get user behavior score from database
         const { data: behaviorScoreData, error: behaviorError } = await supabase
             .rpc('get_user_behavior_score', {
                 p_user_id: userId
             });
 
-        // Get time of day score from database
-        const { data: timeScoreData, error: timeError } = await supabase
-            .rpc('get_time_of_day_score');
+        if (behaviorError) {
+            console.error('Behavior score error:', behaviorError);
+        }
+
+        // Calculate time of day score locally (so it actually changes!)
+        const hour = new Date().getHours();
+        let timeScore = 100;
+        if (hour >= 6 && hour < 18) {
+            timeScore = 100; // Daytime
+        } else if (hour >= 18 && hour < 22) {
+            timeScore = 75; // Evening
+        } else if (hour >= 22 || hour < 2) {
+            timeScore = 50; // Late night
+        } else {
+            timeScore = 25; // Early morning
+        }
 
         // Use database scores or fallback to defaults
         const locationScore = locationScoreData ?? 75;
         const incidentScore = incidentScoreData ?? 90;
         const behaviorScore = behaviorScoreData ?? 80;
-        const timeScore = timeScoreData ?? 100;
 
         // Calculate battery score locally
         let batteryScore = 100;
         if (batteryLevel <= 50) batteryScore = 70;
         if (batteryLevel <= 20) batteryScore = 40;
         if (batteryLevel < 10) batteryScore = 10;
+
+        console.log('=== SAFETY SCORE CALCULATION ===');
+        console.log('Location Score:', locationScore, '(40% weight)');
+        console.log('Time Score:', timeScore, `(15% weight) - Hour: ${hour}`);
+        console.log('Incident Score:', incidentScore, '(20% weight)');
+        console.log('Behavior Score:', behaviorScore, '(15% weight)');
+        console.log('Battery Score:', batteryScore, `(10% weight) - Level: ${batteryLevel}%`);
 
         // Calculate weighted composite score
         const composite = Math.round(
@@ -72,6 +99,9 @@ export async function POST(request: NextRequest) {
             behaviorScore * 0.15 +
             batteryScore * 0.10
         );
+
+        console.log('Composite Score:', composite);
+        console.log('================================');
 
         const scoreBreakdown: SafetyScoreBreakdown = {
             composite,
