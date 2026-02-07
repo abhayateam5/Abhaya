@@ -82,7 +82,7 @@ export default function ZoneCreator({ onZoneCreated }: ZoneCreatorProps) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g., My Hotel, Danger Area"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -127,7 +127,7 @@ export default function ZoneCreator({ onZoneCreated }: ZoneCreatorProps) {
                         min="100"
                         max="5000"
                         step="100"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                     <p className="text-xs text-gray-500 mt-1">
                         {radius}m = {(parseInt(radius) / 1000).toFixed(2)}km
@@ -139,10 +139,10 @@ export default function ZoneCreator({ onZoneCreated }: ZoneCreatorProps) {
                     onClick={handleGetCurrentLocation}
                     disabled={isCreating || !name.trim()}
                     className={`w-full py-3 rounded-lg font-semibold transition-colors ${isCreating || !name.trim()
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : zoneType === 'safe'
-                                ? 'bg-green-600 text-white hover:bg-green-700'
-                                : 'bg-red-600 text-white hover:bg-red-700'
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : zoneType === 'safe'
+                            ? 'bg-green-600 text-white hover:bg-green-700'
+                            : 'bg-red-600 text-white hover:bg-red-700'
                         }`}
                 >
                     {isCreating ? 'Creating...' : `Create ${zoneType === 'safe' ? 'Safe' : 'Danger'} Zone`}
