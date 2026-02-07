@@ -76,7 +76,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         value={formData.incident_date}
                         onChange={(e) => setFormData({ ...formData, incident_date: e.target.value })}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -89,7 +89,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         value={formData.incident_type}
                         onChange={(e) => setFormData({ ...formData, incident_type: e.target.value })}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     >
                         <option value="">Select incident type</option>
                         {INCIDENT_TYPES.map((type) => (
@@ -111,7 +111,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         onChange={(e) => setFormData({ ...formData, incident_address: e.target.value })}
                         placeholder="Enter incident location"
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -127,7 +127,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         required
                         minLength={20}
                         rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -141,7 +141,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         onChange={(e) => setFormData({ ...formData, suspect_description: e.target.value })}
                         placeholder="Physical description, clothing, etc."
                         rows={2}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -155,7 +155,7 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                         value={formData.suspect_count}
                         onChange={(e) => setFormData({ ...formData, suspect_count: parseInt(e.target.value) || 0 })}
                         min="0"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     />
                 </div>
 
@@ -164,8 +164,8 @@ export default function EFIRForm({ onSuccess }: { onSuccess?: () => void }) {
                     type="submit"
                     disabled={isSubmitting}
                     className={`w-full py-3 rounded-lg font-semibold transition-colors ${isSubmitting
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-blue-600 text-white hover:bg-blue-700'
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-blue-600 text-white hover:bg-blue-700'
                         }`}
                 >
                     {isSubmitting ? 'Creating e-FIR...' : '📝 Create e-FIR'}

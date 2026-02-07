@@ -26,7 +26,7 @@ export default function AnomalyAlerts() {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                             speed: position.coords.speed ? (position.coords.speed * 3.6) : 0, // m/s to km/h
-                            battery_level: 50, // Mock battery level
+                            battery_level: 15, // Low battery for testing (triggers anomaly)
                         }),
                     });
 
@@ -73,8 +73,8 @@ export default function AnomalyAlerts() {
                     onClick={detectAnomalies}
                     disabled={isDetecting}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors ${isDetecting
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-blue-600 text-white hover:bg-blue-700'
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-blue-600 text-white hover:bg-blue-700'
                         }`}
                 >
                     {isDetecting ? 'Detecting...' : '🔍 Detect Now'}
@@ -103,8 +103,8 @@ export default function AnomalyAlerts() {
                                             <p className="text-sm mt-1">{anomaly.description}</p>
                                         </div>
                                         <span className={`px-2 py-1 rounded text-xs font-semibold uppercase ${anomaly.severity === 'critical' ? 'bg-red-200' :
-                                                anomaly.severity === 'high' ? 'bg-orange-200' :
-                                                    anomaly.severity === 'medium' ? 'bg-yellow-200' : 'bg-blue-200'
+                                            anomaly.severity === 'high' ? 'bg-orange-200' :
+                                                anomaly.severity === 'medium' ? 'bg-yellow-200' : 'bg-blue-200'
                                             }`}>
                                             {anomaly.severity}
                                         </span>
@@ -120,7 +120,7 @@ export default function AnomalyAlerts() {
                 <p className="font-semibold mb-1">Detected Anomalies:</p>
                 <ul className="list-disc list-inside space-y-1">
                     <li>Inactivity (30min+)</li>
-                    <li>Route deviation (>2km)</li>
+                    <li>Route deviation ({'>'}2km)</li>
                     <li>Speed anomaly</li>
                     <li>GPS signal loss</li>
                     <li>Unusual hours (2-5 AM)</li>
