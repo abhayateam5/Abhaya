@@ -143,19 +143,25 @@ GRANT SELECT, INSERT ON evidence_files TO authenticated, anon;
 
 ## 🚀 Next Steps
 
-### Phase 11: Safety Score v2
-- Location safety scoring (40%)
-- Time of day factor (15%)
-- Recent incidents (20%)
-- User behavior (15%)
-- Battery level (10%)
+### ✅ Phase 11: Safety Score v2 (COMPLETED)
+- ✅ Location safety scoring (40%)
+- ✅ Time of day factor (15%)
+- ✅ Recent incidents (20%)
+- ✅ User behavior (15%)
+- ✅ Battery level (10%)
+
+### Phase 12: Offline Mode & Sync
+- Service worker implementation
+- IndexedDB for offline storage
+- Background sync
+- Conflict resolution
 
 ---
 
 ## 📊 Overall Progress
 
-**Phases Completed:** 10/18 (56%)  
-**Estimated Remaining:** ~25 hours
+**Phases Completed:** 11/18 (61%)  
+**Estimated Remaining:** ~22 hours
 
 ---
 
