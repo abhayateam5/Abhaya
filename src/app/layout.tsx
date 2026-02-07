@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import ServiceWorkerProvider from '@/components/ServiceWorkerProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -48,11 +49,13 @@ export default function RootLayout({
                 <link rel="manifest" href="/manifest.json" />
             </head>
             <body className={`${inter.variable} font-sans antialiased`}>
-                <div id="root" className="min-h-screen">
-                    {children}
-                </div>
-                <div id="modal-root" />
-                <div id="toast-root" />
+                <ServiceWorkerProvider>
+                    <div id="root" className="min-h-screen">
+                        {children}
+                    </div>
+                    <div id="modal-root" />
+                    <div id="toast-root" />
+                </ServiceWorkerProvider>
             </body>
         </html>
     );
